@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #07111f;
+  --bg-elevated: rgba(12, 31, 51, 0.82);
+  --fg: #edf7ff;
+  --muted: #91a9b9;
+  --line: rgba(120, 205, 255, 0.14);
+  --accent: #66d8ff;
+  --accent-bright: #a0eaff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-geist-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(49, 153, 201, 0.13), transparent 28rem),
+    radial-gradient(circle at 12% 68%, rgba(42, 112, 155, 0.08), transparent 32rem),
+    linear-gradient(180deg, #091625 0%, #07111f 55%, #050d18 100%);
+  color: var(--fg);
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(126, 210, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 210, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07111f;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #07111f;
+  border-radius: 999px;
+  background: #27556a;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(102, 216, 255, 0.18); }
+  50% { box-shadow: 0 0 0 12px rgba(102, 216, 255, 0); }
+}
+
+.tech-pulse {
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+.header-hover {
+  position: relative;
+}
+
+.header-hover__label {
+  transition:
+    transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    text-shadow 350ms ease;
+}
+
+.header-hover::after {
+  content: "";
+  position: absolute;
+  right: 14%;
+  bottom: 0.35rem;
+  left: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), #d5f5ff, var(--accent), transparent);
+  box-shadow: 0 0 12px rgba(102, 216, 255, 0.45);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.header-hover:hover .header-hover__label {
+  transform: translateY(-0.055em);
+  text-shadow: 0 0 18px rgba(102, 216, 255, 0.35);
+}
+
+.header-hover:hover::after {
+  transform: scaleX(1);
+}
+
+.hero-name {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 0.12em;
+}
+
+.hero-name .name-line {
+  display: inline-block;
+  width: fit-content;
+  cursor: default;
+  transition:
+    transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 350ms ease,
+    text-shadow 350ms ease;
+}
+
+.hero-name::after {
+  content: "";
+  position: absolute;
+  right: 12%;
+  bottom: 0;
+  left: 12%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), #d5f5ff, var(--accent), transparent);
+  box-shadow: 0 0 18px rgba(102, 216, 255, 0.55);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-name:hover .name-line {
+  transform: translateY(-0.055em);
+  text-shadow: 0 0 24px rgba(102, 216, 255, 0.3);
+}
+
+.hero-name:hover .name-line:first-child {
+  transition-delay: 20ms;
+}
+
+.hero-name:hover .name-line:last-child {
+  transition-delay: 70ms;
+}
+
+.hero-name:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tech-pulse {
+    animation: none;
+  }
+
+  .hero-name .name-line {
+    transform: none;
+  }
+
+  .hero-name::after {
+    transition: none;
+  }
+
+  .header-hover__label {
+    transform: none;
+  }
+
+  .header-hover::after {
+    transition: none;
+  }
+}
